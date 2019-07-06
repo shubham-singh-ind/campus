@@ -1,0 +1,60 @@
+/* package codechef; // don't place package name! */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class Codechef
+{
+    static boolean IPv4(String s){
+        try{
+            String parts[] = s.split("\\.");
+            if(parts.length != 4)
+                return false;
+            for(String p: parts){
+                int value = Integer.parseInt(p);
+                if(value<0 || value>255)
+                    return false;
+            }
+        }catch(Exception ex){
+            return false;
+        }
+        return true;
+    }
+    
+    static boolean IPv6(String s){
+        return false;
+    }
+    
+    public static List<String> validateIP(List<String> list){
+        List<String> result = new ArrayList<String>();
+        for(String s: list){
+            if(IPv4(s))
+                result.add("IPv4");
+            else if(IPv6(s))
+                result.add("IPv6");
+            else
+                result.add("Neither");
+        }
+        return result;
+    }
+    
+	public static void main (String[] args) throws Exception
+	{
+		// your code goes here
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int T;
+		T = Integer.parseInt(br.readLine());
+		List<String> list = new ArrayList<String>();
+
+		while(T-- > 0){
+		    list.add(br.readLine());
+		}
+        
+        List<String> result;
+        result = validateIP(list);
+        for(String s:result)
+            System.out.println(s);
+	}
+}
