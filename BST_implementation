@@ -91,6 +91,19 @@ void postorder(BstNode *root){
     postorder(root->right);    
     cout<<root->data<<" ";
 }
+bool isBSTUtil(BstNode *root, int minVal, int maxVal){
+    // Time: O(n)
+    if(root == NULL)
+        return true;
+    if(root->data > minVal && root->data <= maxVal
+    && isBSTUtil(root->left, minVal, root->data)
+    && isBSTUtil(root->right, root->data, maxVal))
+        return true;
+    return false;
+}
+bool isBST(BstNode *root){
+    return isBSTUtil(root, INT_MIN, INT_MAX);
+}
 int main() {
 	// your code goes here
 	BstNode *root = NULL;
@@ -110,5 +123,10 @@ int main() {
     cout<<"MIN: "<<min(root)<<endl;
     cout<<"MAX: "<<max(root)<<endl;
     cout<<"Height of tree: "<<heightOfTree(root)<<endl;
-	return 0;
+    cout<<endl;
+    if(isBST(root))
+        cout<<"Yes tree is BST\n";
+    else
+        cout<<"No tree is not BST\n"; 
+    return 0;
 }
