@@ -42,6 +42,12 @@ int max(BstNode *root){
         return root->data;
     max(root->right);
 }
+int heightOfTree(BstNode *root){
+    // height of a tree = max(height of left subtree, height of right subtree) + 1;
+    if(root == NULL)
+        return -1;
+    return max(heightOfTree(root->left), heightOfTree(root->right)) + 1;
+}
 int main() {
 	// your code goes here
 	BstNode *root = NULL;
@@ -60,5 +66,6 @@ int main() {
     cout<<endl;
     cout<<"MIN: "<<min(root)<<endl;
     cout<<"MAX: "<<max(root)<<endl;
+    cout<<"Height of tree: "<<heightOfTree(root)<<endl;
 	return 0;
 }
