@@ -48,6 +48,49 @@ int heightOfTree(BstNode *root){
         return -1;
     return max(heightOfTree(root->left), heightOfTree(root->right)) + 1;
 }
+// Traversal Techniques
+// |-Breadth-first
+//     |-level-order
+// |-Depth-first
+//     |-<root><left><right> - preorder Traversal
+//     |-<left><root><right> - inorder Traversal
+//     |-<left><right><root> - preorder Traversal
+void levelOrderTraversal(BstNode *root){
+    if(root == NULL)
+        return;
+    queue<BstNode *> Queue;
+    Queue.push(root);
+    while(!Queue.empty()){
+        BstNode* current = Queue.front();
+        cout<<current->data<<" ";
+        if(current->left != NULL)
+            Queue.push(current->left);
+        if(current->right != NULL)
+            Queue.push(current->right);
+        Queue.pop();
+    }
+}
+void preorder(BstNode *root){
+    if(root == NULL)
+        return;
+    cout<<root->data<<" ";
+    preorder(root->left);
+    preorder(root->right);
+}
+void inorder(BstNode *root){
+    if(root == NULL)
+        return;
+    inorder(root->left);
+    cout<<root->data<<" ";
+    inorder(root->right);    
+}
+void postorder(BstNode *root){
+    if(root == NULL)
+        return;
+    postorder(root->left);
+    postorder(root->right);    
+    cout<<root->data<<" ";
+}
 int main() {
 	// your code goes here
 	BstNode *root = NULL;
